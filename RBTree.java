@@ -52,49 +52,6 @@ public class RBTree{
 		insertFix(z);
 	}
 
-	/*public void insertValue(int toInsert){
-		if(valueExists(toInsert)){
-			return;
-		}
-		Node z = new Node(toInsert);
-		if(this.root == null){
-			z.setLeft(this.sent);
-			z.setRight(this.sent);
-			z.setParent(this.sent);
-			this.root = z;
-			this.sent.setParent(root);
-			this.sent.setLeft(root);
-			this.sent.setRight(root);
-			return;
-		}
-
-		Node y = this.sent;
-		Node x = this.root;
-		while(x != this.sent){
-			y = x;
-			if(z.getValue() < x.getValue()){
-				x = x.getLeft();
-			}
-			else {
-				x = x.getRight();
-			}
-		}
-		z.setParent(y);
-		if(y == this.sent){
-			this.root = z;
-		}
-		else if (z.getValue() < y.getValue()){
-			y.setLeft(z);
-		}
-		else{
-			y.setRight(z);
-		}
-		z.setLeft(this.sent);
-		z.setRight(this.sent);
-		z.setIsRed(true);
-		insertFix(z);
-	}*/
-
 	public void deleteValue(int toDelete){
 		Node z = this.getNodeWithValue(toDelete);
 		if(z == null){
@@ -229,35 +186,6 @@ public class RBTree{
 
 	}
 
-	/*private void rotateLeft(Node x){
-		if(x.getRight() == this.sent){
-			return;
-		}
-		if(root.getParent() != this.sent){
-			return;
-		}
-		Node y = x.getRight();
-		x.setRight(y.getLeft());
-		y.getLeft().setParent(x);
-		y.setParent(x.getParent());
-
-		if(x.getParent() == this.sent){
-			this.root = y;
-			this.root.setParent(this.sent);
-			this.sent.setLeft(this.root);
-			this.sent.setRight(this.root);
-		}
-		else{
-			if(x == x.getParent().getLeft()){
-				x.getParent().setLeft(y);
-			}
-			else{
-				x.getParent().setRight(y);
-			}
-		}
-		y.setLeft(x);
-		x.setParent(y);
-	}*/
 
 	private void rotateRight(Node x){
 		System.out.printf("Right rotate");
@@ -282,38 +210,6 @@ public class RBTree{
 		y.setRight(x);
 		x.setParent(y);
 	}
-
-
-	/*private void rotateRight(Node x){
-		if(x.getLeft() == this.sent){
-			return;
-		}
-		if(root.getParent() != this.sent){
-			return;
-		}
-		Node y = x.getLeft();
-		x.setLeft(y.getRight());
-		y.getLeft().setParent(x);
-		y.setParent(x.getParent());
-
-		if(x.getParent() == this.sent){
-			this.root = y;
-			this.root.setParent(this.sent);
-			this.sent.setLeft(this.root);
-			this.sent.setRight(this.root);
-		}
-		else{
-			if (x == x.getParent().getLeft()){
-				x.getParent().setLeft(y);
-			}
-			else{
-				x.getParent().setRight(y);
-			}
-		}
-		y.setRight(x);
-		x.setParent(y);
-
-	}*/
 
 	private void insertFix(Node z){
 		while(z.getParent().isRed()){
@@ -355,51 +251,7 @@ public class RBTree{
 			this.root.setIsRed(false);
 		}
 	}
-
-
-/*
-	private void insertFix(Node z){
-		while(z.getParent().isRed()){
-			if(z.getParent() == z.getParent().getParent().getLeft()){
-				Node y = z.getParent().getParent().getRight();
-				if(y.isRed()){
-					z.getParent().setIsRed(false);
-					y.setIsRed(false);
-					z.getParent().getParent().setIsRed(true);
-					z = z.getParent().getParent();
-				}
-				else{
-					if (z == z.getParent().getRight()) {
-						z = z.getParent();
-						rotateLeft(z);
-					}
-					z.getParent().setIsRed(false);
-					z.getParent().getParent().setIsRed(true);
-					rotateRight(z.getParent().getParent());
-				}
-			}
-			else{
-				Node y = z.getParent().getParent().getLeft();
-				if(y.isRed()){
-					z.getParent().setIsRed(false);
-					y.setIsRed(false);
-					z.getParent().getParent().setIsRed(true);
-					z = z.getParent().getParent();
-				}
-				else{
-					if(z == z.getParent().getLeft()){
-						z = z.getParent();
-						rotateRight(z);
-					}
-					z.getParent().setIsRed(false);
-					z.getParent().getParent().setIsRed(true);
-					rotateLeft(z.getParent().getParent());
-				}
-			}
-		}
-		this.root.setIsRed(false);
-	}
-*/
+	
 
 	private void deleteFix(Node toFix){
 		while(toFix != this.root && !toFix.isRed()){
