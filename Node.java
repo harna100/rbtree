@@ -37,7 +37,7 @@ public class Node{
 
 	@Override
 	public String toString() {
-		return "[data = " + value + ":Color = " + Main.padRight((isRed()? "Red": "Black"),5) + ":Parent = " + parent.getValue() + ": LC = " + left.getValue() + ": RC = " + right.getValue() + "]";
+		return "[data = " + value + ":Color = " + Main.padRight((isRed()? "Red": "Black"),5) + ":Parent = " + (parent != null? parent.getValue():"00")  + ": LC = " + left.getValue() + ": RC = " + right.getValue() + "]";
 	}
 
 	public boolean isRed() {

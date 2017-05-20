@@ -17,9 +17,9 @@ public class RBTree{
 			z.setRight(this.sent);
 			z.setParent(this.sent);
 			this.root = z;
-			this.sent.setParent(root);
 			this.sent.setLeft(root);
 			this.sent.setRight(root);
+			return;
 		}
 
 		Node y = sent;
@@ -119,6 +119,10 @@ public class RBTree{
 		return root;
 	}
 
+	public Node getSent(){
+		return sent;
+	}
+
 	private void printInOrder(Node next){
 		if(next.getLeft() != this.sent){
 			printInOrder(next.getLeft());
@@ -160,10 +164,8 @@ public class RBTree{
 	}
 
 	private void rotateLeft(Node x){
-		System.out.printf("Right rotate");
-		if(x.getRight() == this.sent){
-			return;
-		}
+		System.out.println("left rotate");
+
 		Node y = x.getRight();
 		x.setRight(y.getLeft());
 
@@ -174,6 +176,9 @@ public class RBTree{
 
 		if(x.getParent() == this.sent){
 			this.root = y;
+			this.root.setParent(sent);
+			this.sent.setLeft(y);
+			this.sent.setRight(y);
 		}
 		else if (x == x.getParent().getLeft()){
 			x.getParent().setLeft(y);
@@ -188,10 +193,8 @@ public class RBTree{
 
 
 	private void rotateRight(Node x){
-		System.out.printf("Right rotate");
-		if(x.getRight() == this.sent){
-			return;
-		}
+		System.out.println("Right rotate");
+
 		Node y = x.getLeft();
 		x.setLeft(y.getRight());
 		if(y.getRight() != this.sent){
@@ -200,6 +203,10 @@ public class RBTree{
 		y.setParent(x.getParent());
 		if(x.getParent() == this.sent){
 			this.root = y;
+
+			this.root.setParent(sent);
+			this.sent.setLeft(y);
+			this.sent.setRight(y);
 		}
 		else if (x == x.getParent().getRight()){
 			x.getParent().setRight(y);
@@ -249,9 +256,12 @@ public class RBTree{
 				}
 			}
 			this.root.setIsRed(false);
+			if(z == this.sent){
+				break;
+			}
 		}
 	}
-	
+
 
 	private void deleteFix(Node toFix){
 		while(toFix != this.root && !toFix.isRed()){
